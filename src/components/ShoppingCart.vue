@@ -9,9 +9,9 @@
           <span>x {{ product.num }}</span>
         </li>
       </ul>
-      <p>Total</p>
+      <p>Total ${{totalprice}}</p>
       <br>
-      <p>checkout</p>
+      <p>checkout <button @click="checkoutall">checkout</button></p>
     </div>
   </div>
 </template>
@@ -29,14 +29,18 @@
 </style>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      productss: 'cartProducts'
+      productss: 'cartProducts',
+      totalprice: 'totalPrice'
     })
   },
   methods: {
+    ...mapActions({
+      checkoutall: 'checkoutall'
+    })
   }
 }
 </script>

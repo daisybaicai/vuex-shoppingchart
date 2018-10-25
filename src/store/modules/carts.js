@@ -1,6 +1,5 @@
 const state = {
-  items: [],
-  checkout: null
+  items: []
 }
 
 const getters = {
@@ -13,6 +12,11 @@ const getters = {
         num
       }
     })
+  },
+  totalPrice: (state, getters) => {
+    return getters.cartProducts.reduce((total, product) => {
+      return total + product.price * product.num
+    }, 0)
   }
 }
 
@@ -26,6 +30,9 @@ const mutations = {
   increaseitem (state, { id }) {
     const carItem = state.items.find(item => item.id === id)
     carItem.num++
+  },
+  clear (state) {
+    state.items = []
   }
 }
 
@@ -40,6 +47,9 @@ const actions = {
       }
     }
     commit('decreaseproductnum', {id: product.id})
+  },
+  checkoutall ({commit, state}) {
+    commit('clear')
   }
 }
 
